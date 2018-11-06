@@ -26,15 +26,21 @@
         otherPlayers.push(firstPlayer);
       }
 
-      //Skapa sträng för utskrift, en omgång i taget.
 
       var stringResult = "";
       var counter = 1;
+
+      //Skapa sträng för utskrift, en omgång i taget.
       allMatches.forEach(function(round){
         stringResult += `<h2>Omgång ${counter}</h2><ul>`;
         for (let i=0; i < antal/2; i++) {
           let last = antal - i - 1;
-          stringResult += `<li>${round[i]} - ${round[last]}</li>`;
+          let str = "";
+          if (round[i] != round[last])
+            str = `<li>${round[i]} - ${round[last]}</li>`;
+          else
+            str = `<li>${round[i]} står över den här omgången.`;
+          stringResult += str;
         }
         counter++;
         stringResult += `</ul>`;
