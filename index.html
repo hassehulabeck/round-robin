@@ -1,8 +1,8 @@
 <html>
 <head>
+  <meta charset="utf-8">
   <link href="style.css" rel="stylesheet">
   <script>
-    var stringResult = "";
 
     function getMatches(antal) {
       // create players.
@@ -10,10 +10,38 @@
       for (let i=0; i<antal; i++) {
         spelare.push(String.fromCharCode(65 + i));
       }
-      spelare.forEach(function(bokstav){
-        stringResult += bokstav;
+
+      // Skapa matcher per omgång.
+      var allMatches = [];
+      var otherPlayers = spelare.slice(1);
+
+      for (let i=1; i <= antal-1; i++) {
+        var thisRound = [];
+        var j = i-1; // För index till matchesByRound
+        thisRound.push(spelare[0]);
+        allMatches.push(thisRound.concat(otherPlayers));
+
+        // Rotera spelare i otherPlayers
+        var firstPlayer = otherPlayers.shift();
+        otherPlayers.push(firstPlayer);
+      }
+
+      //Skapa sträng för utskrift, en omgång i taget.
+
+      var stringResult = "";
+      var counter = 1;
+      allMatches.forEach(function(round){
+        stringResult += `<h2>Omgång ${counter}</h2><ul>`;
+        for (let i=0; i < antal/2; i++) {
+          let last = antal - i - 1;
+          stringResult += `<li>${round[i]} - ${round[last]}</li>`;
+        }
+        counter++;
+        stringResult += `</ul>`;
       })
       return stringResult;
+
+      console.log(allMatches);
     }
 
     document.addEventListener('DOMContentLoaded', ()=>{
