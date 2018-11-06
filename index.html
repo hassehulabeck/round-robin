@@ -2,15 +2,23 @@
 <head>
   <link href="style.css" rel="stylesheet">
   <script>
+    var stringResult = "";
 
     function getMatches(antal) {
-      
-
+      // create players.
+      spelare = [];
+      for (let i=0; i<antal; i++) {
+        spelare.push(String.fromCharCode(65 + i));
+      }
+      spelare.forEach(function(bokstav){
+        stringResult += bokstav;
+      })
+      return stringResult;
     }
 
     document.addEventListener('DOMContentLoaded', ()=>{
       var output = document.getElementsByTagName('div');
-      output.innerHTML = getMatches(6);
+      output[0].innerHTML = getMatches(6);
     });
   </script>
 </head>
