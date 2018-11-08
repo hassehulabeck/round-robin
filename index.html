@@ -15,9 +15,8 @@
       var allMatches = [];
       var otherPlayers = spelare.slice(1);
 
-      for (let i=1; i <= antal-1; i++) {
+      for (let i=0; i < antal-1; i++) {
         var thisRound = [];
-        var j = i-1; // För index till matchesByRound
         thisRound.push(spelare[0]);
         allMatches.push(thisRound.concat(otherPlayers));
 
@@ -33,9 +32,22 @@
       //Skapa sträng för utskrift, en omgång i taget.
       allMatches.forEach(function(round){
         stringResult += `<h2>Omgång ${counter}</h2><ul>`;
+
+        // Varje omgång ska ha antal matcher = spelare/2
         for (let i=0; i < antal/2; i++) {
+
+          // Last letar upp sista elementet i arrayen.
           let last = antal - i - 1;
           let str = "";
+
+          /*
+            I varje omgång plockas spelare ur arrayen.
+            En från början, en från slutet.
+            Om det är ojämnt antal blir värdet detsamma för i och för last sista gången.
+           */
+          // ABCDE
+          //AE, BD, CC
+
           if (round[i] != round[last])
             str = `<li>${round[i]} - ${round[last]}</li>`;
           else
